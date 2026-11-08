@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Album Foto Kegiatan ke Word</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>📸 Album Foto Kegiatan Anak</h1>
+      <p>
+        Masukkan foto, lalu unduh sebagai file Word. Satu halaman berisi 15 foto
+        (3 kolom × 5 baris).
+      </p>
+    </header>
+    <main>
+      <section class="card">
+        <h2>Langkah 1. Mau buat file apa?</h2>
+        <div class="choice">
+          <div>
+            <input type="radio" name="mode" id="m-new" checked /><label
+              for="m-new"
+              ><span>📄</span>Buat file baru</label
+            >
+          </div>
+          <div>
+            <input type="radio" name="mode" id="m-old" /><label for="m-old"
+              ><span>📂</span>Lanjutkan file yang sudah ada</label
+            >
+          </div>
+        </div>
+        <div id="oldbox" hidden>
+          <label class="lb" for="oldfile"
+            >Pilih file Word (.docx) yang dulu dibuat dari aplikasi ini:</label
+          >
+          <input type="file" id="oldfile" accept=".docx" />
+          <p class="hint">
+            Foto lama tetap ada. Foto baru akan mengisi kotak yang masih kosong.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Langkah 2. Tulis judul halaman</h2>
+        <input
+          type="text"
+          id="title"
+          value="INI KEGIATANKU INTRAKURIKULER DAN KOKURIKULER"
+          aria-label="Judul halaman"
+        />
+        <label class="chk"
+          ><input type="checkbox" id="bg" checked /><span
+            >Pakai latar segitiga merah-kuning di file Word</span
+          ></label
+        >
+      </section>
+
+      <section class="card">
+        <h2>Langkah 3. Tambahkan foto</h2>
+        <button class="btn big" id="addbtn" type="button">📷 Pilih foto</button>
+        <input type="file" id="pick" accept="image/*" multiple hidden />
+        <p class="hint">
+          Bisa pilih banyak foto sekaligus. Foto masuk ke kotak kosong
+          berikutnya secara berurutan. Atau tekan kotak kosong (+) di bawah
+          untuk memilih letaknya sendiri. Foto masuk apa adanya, tidak dipotong.
+          Kalau mau memotong, menggeser, atau memperbesar, tekan fotonya. Tekan
+          ⇄ untuk menukar posisi dua foto. Tekan ✕ untuk menghapus.
+        </p>
+        <p id="msg" role="status" aria-live="polite"></p>
+      </section>
+
+      <p id="count"></p>
+      <div id="pages"></div>
+      <p style="text-align: center">
+        <button class="btn alt" id="morepage" type="button">
+          ➕ Tambah halaman kosong
+        </button>
+      </p>
+    </main>
+
+    <div id="swapbar" role="status" hidden>
+      <span id="swaptxt"></span
+      ><button class="btn alt" id="swapcancel" type="button">Batal</button>
+    </div>
+
+    <div
+      class="modal"
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mt"
+      hidden
+    >
+      <div class="mbox">
+        <h2 id="mt">Atur foto</h2>
+        <p class="hint" style="margin: 0">
+          Foto masuk apa adanya (tidak dipotong). Kalau mau dipotong, tekan
+          “Potong pas kotak”, lalu geser foto sampai wajah terlihat. Tombol +
+          dan − memperbesar atau memperkecil.
+        </p>
+        <canvas
+          id="ec"
+          width="1200"
+          height="960"
+          tabindex="0"
+          aria-label="Pratinjau foto. Geser dengan mouse, jari, atau tombol panah."
+        ></canvas>
+        <div class="zrow">
+          <button class="btn alt" id="zout" type="button" aria-label="Perkecil">
+            −
+          </button>
+          <input
+            type="range"
+            id="zoom"
+            min="0.2"
+            max="4"
+            step="0.01"
+            value="1"
+            aria-label="Ukuran foto"
+          />
+          <button class="btn alt" id="zin" type="button" aria-label="Perbesar">
+            +
+          </button>
+        </div>
+        <div class="mrow">
+          <button class="btn alt" id="efit" type="button">
+            Foto utuh (tanpa potong)
+          </button>
+          <button class="btn alt" id="ecrop" type="button">
+            ✂️ Potong pas kotak
+          </button>
+        </div>
+        <div class="mrow">
+          <button class="btn" id="esave" type="button">✔ Simpan</button>
+          <button class="btn alt" id="ecancel" type="button">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bar">
+      <input
+        type="text"
+        id="fname"
+        value="Kegiatan-Anak"
+        aria-label="Nama file Word"
+      />
+      <button class="btn" id="dl" type="button">⬇️ Unduh file Word</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
